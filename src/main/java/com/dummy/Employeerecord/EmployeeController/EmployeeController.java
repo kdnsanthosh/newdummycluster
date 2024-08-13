@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(value = "*")
-@RequestMapping("/api")
+@RequestMapping("/api/employees")
 public class EmployeeController {
 
     @GetMapping

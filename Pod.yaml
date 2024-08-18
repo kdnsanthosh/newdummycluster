@@ -2,8 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: employee-record-app
-  labels:
-    app: employee-record
+  namespace: santhosh5858-dev
 spec:
   containers:
     - name: employee-record-container
@@ -15,11 +14,11 @@ spec:
           value: "default"
       resources:
         limits:
-          memory: "512Mi"
-          cpu: "500m"
-        requests:
           memory: "256Mi"
           cpu: "250m"
+        requests:
+          memory: "128Mi"
+          cpu: "125m"
       readinessProbe:
         httpGet:
           path: /actuator/health

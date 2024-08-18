@@ -1,12 +1,44 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: employee-record-app
   namespace: santhosh5858-dev
 spec:
-  containers:
-    - name: employee-record-container
-      image: docker.io/jilla5858/employeeappimage:latest
-      ports:
-        - containerPort: 8080
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-record
+  template:
+    metadata:
+      labels:
+        app: employee-record
+    spec:
+      containers:
+        - name: employee-record-container
+          image: docker.io/jilla5858/employeeappimage:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "default"
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+            requests:
+              memory: "128Mi"
+              cpu: "125m"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+
     

@@ -9,26 +9,4 @@ spec:
       image: docker.io/jilla5858/employeeappimage:latest
       ports:
         - containerPort: 8080
-      env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "default"
-      resources:
-        limits:
-          memory: "256Mi"
-          cpu: "250m"
-        requests:
-          memory: "128Mi"
-          cpu: "125m"
-      readinessProbe:
-        httpGet:
-          path: /actuator/health
-          port: 8080
-        initialDelaySeconds: 10
-        periodSeconds: 10
-      livenessProbe:
-        httpGet:
-          path: /actuator/health
-          port: 8080
-        initialDelaySeconds: 30
-        periodSeconds: 30
-  restartPolicy: Always
+    
